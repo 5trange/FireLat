@@ -7,12 +7,12 @@ import sys
 import os
 import time
 response_list=ping('139.99.68.225')
-print("==FireLat Web== \nFaceit Routing Optimizer for BSNL(NETLINK).\nCoded by Strange.")
+print("==FireLat Web== \nVariant: FACEIT Route Fixer.\nCoded by Strange.")
 lat=response_list.rtt_avg_ms
 print("Latency before run-time= ",lat,"ms")
-print("IP before run-time: ",requests.get("http://ipconfig.in/ip").text)
+print("IP before run-time: ",requests.get("http://ipecho.net/plain?").text)
 login = 0
-if lat < 45:
+if lat < 70:
     login = 1
 properties = Options()
 properties.headless = True
@@ -32,7 +32,7 @@ capcha_verifier.send_keys(Keys.RETURN)
 ###############################
 # Checking Latency
 ###############################
-while lat > 45:
+while lat > 70:
     print("Restarting Connection..")
     browser.switch_to.parent_frame()
     browser.switch_to.frame('topFrame')
@@ -48,8 +48,8 @@ while lat > 45:
     response_list = ping('139.99.68.225')
     lat = response_list.rtt_avg_ms
     print("Latency after restart= ", lat, "ms")
-    print("IP address after restart: ", requests.get("http://ipconfig.in/ip").text)
-    if lat < 45:
+    print("IP address after restart: ", requests.get("http://ipecho.net/plain?").text)
+    if lat < 70:
         browser.switch_to.parent_frame()
         browser.switch_to.frame('topFrame')
         logout = browser.find_element_by_xpath(r'/html/body/form/table[2]/tbody/tr[1]/td[2]/font[2]/input')
@@ -68,6 +68,6 @@ if login == 1:
     os.system("taskkill /f /im chrome.exe")#Cleaning up.
 print("==Process Complete==")
 print("Final latency= ",lat,"ms")
-print("IP address: ", requests.get("http://ipconfig.in/ip").text)
+print("IP address: ", requests.get("http://ipecho.net/plain?").text)
 input("Press Enter to exit.")
 sys.exit()
